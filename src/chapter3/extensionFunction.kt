@@ -15,6 +15,13 @@ fun extensionFunctionTest () {
 }
 
 // 확장함수를 활용한 유틸리티
+// default parameter도 가능하다.
+// 확장 함수는 오버라이드할 수 없다.
+// 확장 함수는 클래스의 일부가 아니다. -> 확장 함수는 클래스 밖에 선언된다.
+// 메소드들이 정적으로 결정된다.
+// 그렇기 때문에 Button이 View 상속한 구조임에도 불구하고
+// View view = Button()
+// view.showOff() -> I'm View 노출 실제로 타입은 Button이지만 Button의 showOff를 호출하는게 아닌 View의 showOff를 호출
 fun Collection<String>.joinToString(
     separator: String = ", ",
     prefix: String = "",
@@ -29,7 +36,22 @@ fun Collection<String>.joinToString(
     return result.toString()
 }
 
+// 확장 함수 예시
+public fun <T> List<T>.last(): T {
+    if (isEmpty())
+        throw NoSuchElementException("List is empty.")
+    return this[lastIndex]
+}
+
 fun main() {
     val set = setOf("nesoy", "kotlin")
     println(set.joinToString())
+
+    val strings: List<String> = listOf("first", "second", "last")
+
+    strings.last()
 }
+
+//fun listOf<T> (vararg values:T): List<T> {
+//
+//}
